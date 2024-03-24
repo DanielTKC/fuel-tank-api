@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class TankViewSet(viewsets.ModelViewSet):
     """
-    Api endpoint that allows Tanks to be viewed or edited
+    Api endpoint that allows Tanks to be viewed or edited. CRUD
     """
     queryset = Tank.objects.all()
     serializer_class = TankSerializer
@@ -22,11 +22,11 @@ class TankViewSet(viewsets.ModelViewSet):
 
 class TankVolumeViewSet(viewsets.ModelViewSet):
     """
-    Api endpoint that allows Tanks to be viewed or edited
+    Api endpoint that allows Tanks to be created, viewed, or edited. CRUD
     """
     queryset = TankVolume.objects.all()
     serializer_class = TankVolumeSerializer
-    permission_classes = [permissions.AllowAny]  # same note as above
+    permission_classes = [permissions.AllowAny]  # same authentication note as above
 
     def perform_create(self, serializer):
         instance = serializer.save()
@@ -96,6 +96,9 @@ class TankVolumeViewSet(viewsets.ModelViewSet):
 
 
 class RunningAverageSalesView(APIView):
+    """
+    How we deliver the weekly average.
+    """
     def get(self, request, tank_id, date):
         # Get the date from the URL
         target_date = datetime.strptime(date, '%Y-%m-%d').date()

@@ -16,8 +16,8 @@ class DailyTankSalesModelTest(TestCase):
 
         # Manually trigger the update_daily_tank_sales method
         view = TankVolumeViewSet()
-        view.update_daily_tank_sales(volume1)
-        view.update_daily_tank_sales(volume2)
+        view.create_daily_tank_sales(volume1)
+        view.create_daily_tank_sales(volume2)
 
         # Print out debugging information
         print("Tank ID:", tank.id)

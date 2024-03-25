@@ -1,7 +1,7 @@
 # urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TankViewSet, TankVolumeViewSet, RunningAverageSalesView, DailyTanksViewSet, TankVolumeLookup
+from .views import TankViewSet, TankVolumeViewSet, RunningAverageSalesView, DailyTanksViewSet, TankVolumeLookupView
 
 router = DefaultRouter()
 router.register(r'tanks', TankViewSet, basename='tank')
@@ -12,6 +12,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('tanks/<int:tank_id>/average-sales/<str:date>/', RunningAverageSalesView.as_view(),
          name='running-average-sales'),
-    path('tank-volume-lookup/', TankVolumeLookup.as_view(), name='tank-volume-lookup'),
+    path('tank-volume-lookup/', TankVolumeLookupView.as_view(), name='tank-volume-lookup'),
 
 ]

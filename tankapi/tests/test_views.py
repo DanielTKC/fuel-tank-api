@@ -25,6 +25,10 @@ class RunningAverageSalesViewTest(TestCase):
         volume10 = TankVolume.objects.create(tank_id=self.tank, volume=12, created_at='2023-01-29T10:30:00Z')
         volume11 = TankVolume.objects.create(tank_id=self.tank, volume=49, created_at='2023-01-29T12:30:00Z')
 
+        # Reload so created_at is a datetime rather than the string passed in above.
+        for volume in (volume1, volume2, volume3, volume4, volume5, volume6, volume7, volume8, volume9, volume10, volume11):
+            volume.refresh_from_db()
+
         self.view.create_daily_tank_sales(volume1)
         self.view.create_daily_tank_sales(volume2)
         self.view.create_daily_tank_sales(volume3)
